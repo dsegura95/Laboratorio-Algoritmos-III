@@ -30,7 +30,7 @@ public class LeerArchivo{
     String z= in.readLine();
     numero = Integer.parseInt(z);
     int[][] tok = new int[numero][2];
-
+   
     while ((s = in.readLine()) != null ){
     	String[] par = s.split("\\s+");
     	// Separa el string en dos caracteres
