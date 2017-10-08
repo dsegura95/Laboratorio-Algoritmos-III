@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Ruta {
 	
 	static int[][] adyacen;
+	ArrayList<String> camino = new ArrayList<String>();
+	private Iterator<String> iter;
 	
 	public void roywarshall(int[][] matriz){
 		int n = matriz.length;
@@ -29,12 +33,34 @@ public class Ruta {
 		System.out.println(" ");}
 	}
 	
+	public void flavianni(String inicio, String fin) {
+		int numeroi = Integer.parseInt(inicio);
+		int numerof = Integer.parseInt(fin);
+		camino.add(inicio);
+		if (adyacen[numeroi][numerof] == adyacen.length + 2) {
+			camino.add(fin);
+			iter = camino.iterator();
+			while (iter.hasNext()) {
+				String elemento = iter.next();
+				System.out.print(elemento+" ");
+			}
+			
+		}
+		else if(adyacen[numeroi][numerof] == 0) {
+			System.out.println("No hay ruta entre los dos puntos");
+		}
+		else {
+			String cadena = String.valueOf(adyacen[numeroi][numerof]-1);
+			flavianni(cadena,fin);
+		}
+	}
+	
 	public static void main (String[] args) {
 		Grafo grafo = new Grafo();
-		grafo.leer("C:\\Users\\Tecnologia\\Desktop\\KyD\\Laboratorio 1\\Ruta\\src\\facil.txt");
+		grafo.leer(args[0]);
 		adyacen = grafo.matriz_adyacencia(grafo.arreglo_relaciones);
 		Ruta caminos = new Ruta();
 		caminos.roywarshall(adyacen);
-		caminos.mostrarMatriz(adyacen);
+		caminos.flavianni(args[1],args[2]);
 	}
  }
